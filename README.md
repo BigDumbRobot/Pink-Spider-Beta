@@ -1,8 +1,7 @@
 # Pink Spider (beta) by Anti-Music
-[list]
-[*]**Input Section** - A console preamp, tube stage, an 1176-style FET limiter
-[*]**Harmonic Processing** - four colours (iron, triode, pentode, tape). 
-[/list]
+
+A console preamp, tube stage, an 1176-style FET limiter + four colours (iron, triode, pentode, tape). 
+
 Built for any track or master bus processing.
 VST3 and Audio Unit, for Mac and Windows.
 
