@@ -1,0 +1,40 @@
+# Pink Spider (beta) by Anti-Music
+
+**The channel you put first on every track:** a console preamp, a tube stage, an 1176-style FET limiter and a converter, then four analog colours (iron, triode, pentode, tape). VST3 and Audio Unit, for Mac and Windows.
+
+![Pink Spider](images/pink-spider.png)
+
+## Download
+
+**[Get the latest beta](https://github.com/lilPZmods/Pink-Spider-Beta/releases/latest)**
+
+| Your computer | Download | Formats |
+|---|---|---|
+| Mac (macOS 11+, Apple Silicon or Intel) | `Pink-Spider-<version>-macOS.pkg` | VST3, Audio Unit |
+| Windows (10 / 11, 64-bit) | `Pink-Spider-<version>-Windows-Setup.exe` | VST3 |
+
+Pro Tools (AAX) comes later.
+
+## Install in three steps
+
+1. Quit your DAW and run the installer.
+   - **Mac:** if macOS says it can't verify the installer, go to **System Settings → Privacy & Security** and click **Open Anyway**.
+   - **Windows:** if you see "Windows protected your PC", click **More info → Run anyway**.
+
+   The beta isn't signed yet, so this extra step is expected.
+2. Open your DAW and rescan plugins if needed.
+3. Add **Pink Spider** (by **Anti-Music**) as the first plugin on a track.
+
+## Manual
+
+**[Download the manual (PDF)](https://github.com/lilPZmods/Pink-Spider-Beta/raw/main/docs/Pink-Spider-Manual.pdf)**: install help, a tour of every control, sounds to try, and troubleshooting. It's also attached to every release.
+
+Prefer to read it here? **[Read the manual on GitHub](MANUAL.md)**.
+
+## Found a bug? Have an idea?
+
+**[Report it here](https://github.com/lilPZmods/Pink-Spider-Beta/issues/new/choose)**. Tell us your computer, your DAW, and what happened. Thank you for testing!
+
+---
+
+Pink Spider © 2026 Anti-Music. Free beta for testing, provided as is: see [LICENSE](LICENSE.txt). From Canada with love.

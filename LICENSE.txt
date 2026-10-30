@@ -1,0 +1,28 @@
+PINK SPIDER BETA - TESTER LICENCE
+
+Copyright (c) 2026 Anti-Music. All rights reserved.
+
+Pink Spider is pre-release software, given to you free of charge so you can test it.
+
+You may:
+  - install and use this beta on your own computers, including for paid work;
+  - share your opinions, recordings and screenshots made with it.
+
+You may not:
+  - redistribute, sell or re-host the installers or plugin files (point people to
+    the download page instead);
+  - reverse engineer, decompile or modify the plugin.
+
+This beta may contain bugs, may stop working when it expires or is replaced by a
+newer build, and may not open sessions saved with later versions. Keep backups.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL ANTI-MUSIC BE LIABLE FOR
+ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR ITS USE.
+
+THIRD-PARTY NOTICES
+  - Built with JUCE (juce.com), used under the JUCE licence.
+  - VST is a registered trademark of Steinberg Media Technologies GmbH.
+  - Permanent Marker font by Font Diner, Apache License 2.0.

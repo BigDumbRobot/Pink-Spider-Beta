@@ -1,0 +1,15 @@
+name: Feedback or idea
+description: What you love, what you'd change, what you wish it did.
+labels: [feedback]
+body:
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Your feedback
+    validations:
+      required: true
+  - type: input
+    id: setup
+    attributes:
+      label: What you used it on (optional)
+      placeholder: e.g. lead vocal in Live, drum room in Logic

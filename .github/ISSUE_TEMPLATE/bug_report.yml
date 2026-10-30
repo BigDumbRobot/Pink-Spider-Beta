@@ -1,0 +1,61 @@
+name: Bug report
+description: Something broke, sounds wrong, or doesn't work as the manual says.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for testing Pink Spider! The more detail, the faster it gets fixed.
+  - type: dropdown
+    id: os
+    attributes:
+      label: Computer
+      options: [Mac (Apple Silicon), Mac (Intel), Windows]
+    validations:
+      required: true
+  - type: input
+    id: os_version
+    attributes:
+      label: OS version
+      placeholder: e.g. macOS 15.1, Windows 11 24H2
+    validations:
+      required: true
+  - type: input
+    id: daw
+    attributes:
+      label: DAW and version
+      placeholder: e.g. Ableton Live 12.1, Logic Pro 11.1, Reaper 7.2
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Plugin format
+      options: [VST3, Audio Unit, Not sure]
+  - type: input
+    id: version
+    attributes:
+      label: Pink Spider version
+      description: It's in the installer's file name.
+      placeholder: e.g. 0.1.0-beta.1
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can we make it happen?
+      placeholder: |
+        1. Put Pink Spider on a stereo track
+        2. Turn GAIN to 66
+        3. ...
+  - type: textarea
+    id: files
+    attributes:
+      label: Screenshots, recordings or crash reports
+      description: Drag files here. If your DAW crashed, attach its crash report if it made one.

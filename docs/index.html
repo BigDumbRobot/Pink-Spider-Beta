@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pink Spider Manual</title>
+<meta name="description" content="Pink Spider by Anti-Music: console preamp, FET limiter, A/D and analog harmonics. User manual for the beta.">
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: "Permanent Marker"; src: url("fonts/PermanentMarker-Regular.ttf") format("truetype"); }
+
+:root {
+  --night: #12062a; --panel: #1d0a38; --dusk: #2a0b4a; --edge: #3d1d6b;
+  --pink: #ff71ce; --cyan: #01cdfe; --mint: #05ffa1; --lavender: #b967ff;
+  --lemon: #fffb96; --sunset: #ff9e3d; --red: #ff4060;
+  --text: #f3e8ff; --dim: #a98bd6; --faint: #7a62a3;
+  --sans: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --marker: "Permanent Marker", "Marker Felt", cursive;
+}
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #0b0320; color: var(--text); font: 15px/1.6 var(--sans); }
+img { max-width: 100%; display: block; }
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #fff; font-weight: 700; }
+code, kbd { font: 600 0.88em ui-monospace, "SF Mono", Menlo, Consolas, monospace; background: rgba(185,103,255,.16); border: 1px solid rgba(185,103,255,.3); border-radius: 5px; padding: 1px 6px; color: var(--lemon); }
+kbd { color: var(--text); border-bottom-width: 2px; }
+
+/* Pages: separate sheets on screen, Letter pages in print. */
+.page { width: 8.5in; min-height: 11in; margin: 28px auto; padding: 0.7in 0.75in 0.8in; position: relative;
+  background: radial-gradient(120% 60% at 50% 0%, #22093f 0%, var(--night) 60%); border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.5); overflow: hidden; }
+.page::after { content: attr(data-footer); position: absolute; left: 0.75in; right: 0.75in; bottom: 0.38in;
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
+  border-top: 1px solid var(--edge); padding-top: 8px; }
+.page .pageno { position: absolute; right: 0.75in; bottom: 0.38in; font-size: 10px; color: var(--faint); padding-top: 9px; }
+@page { size: letter; margin: 0; }
+@media print {
+  body { background: var(--night); }
+  .page { margin: 0; border-radius: 0; box-shadow: none; height: 11in; page-break-after: always; break-after: page; }
+  .noprint { display: none !important; }
+  /* Soft glows turn into solid boxes in Mac Preview: print crisp edges instead. */
+  *, *::before, *::after { box-shadow: none !important; filter: none !important; }
+  .pin, .item .n, .dot { outline: 3px solid rgba(18,6,42,.9); }
+}
+@media screen and (max-width: 900px) {
+  .page { width: auto; min-height: 0; margin: 0; border-radius: 0; padding: 40px 18px 70px; }
+  .page::after, .page .pageno { left: 18px; right: 18px; }
+  .two, .three, .legend.cols { grid-template-columns: 1fr !important; }
+  .cover h1 { font-size: 64px !important; }
+}
+
+/* Type */
+.kicker { font: 800 11px var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--pink); margin: 0 0 6px; }
+h2 { font: 900 38px/1.05 var(--sans); margin: 0 0 6px; letter-spacing: -.02em;
+  background: linear-gradient(180deg, #fff 0%, #f3d9ff 45%, var(--pink) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+h2 .num { font-family: var(--marker); font-weight: 400; color: var(--lemon); -webkit-text-fill-color: var(--lemon); margin-right: 10px; }
+.lede { font-size: 16.5px; color: var(--dim); margin: 0 0 22px; max-width: 6in; }
+h3 { font: 800 17px var(--sans); margin: 22px 0 8px; color: #fff; display: flex; align-items: center; gap: 10px; }
+h3::before { content: ""; width: 14px; height: 3px; border-radius: 2px; background: var(--accent, var(--pink)); box-shadow: 0 0 8px var(--accent, var(--pink)); }
+p { margin: 0 0 10px; }
+ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 0 0 8px; }
+ol.steps > li { counter-increment: s; position: relative; padding: 0 0 10px 40px; }
+ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: -1px; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; font: 800 13px var(--sans); color: var(--night); background: var(--accent, var(--cyan)); }
+ul { padding-left: 20px; margin: 0 0 10px; }
+li { margin-bottom: 4px; }
+.small { font-size: 12.5px; color: var(--dim); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+/* Panels and notes */
+.card { background: rgba(29,10,56,.85); border: 1px solid var(--edge); border-radius: 12px; padding: 16px 18px; }
+.note { border-left: 3px solid var(--lemon); background: rgba(255,251,150,.06); border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.note.warn { border-color: var(--sunset); background: rgba(255,158,61,.07); }
+.note.tip { border-color: var(--mint); background: rgba(5,255,161,.06); }
+.note b.lbl { display: block; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--lemon); margin-bottom: 2px; }
+.note.warn b.lbl { color: var(--sunset); } .note.tip b.lbl { color: var(--mint); }
+
+/* Screenshots with numbered pins */
+.fig { position: relative; border-radius: 12px; overflow: visible; margin: 6px 0 14px; }
+.fig img { border-radius: 12px; border: 1px solid var(--edge); box-shadow: 0 12px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,113,206,.06); }
+.pin { position: absolute; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; font: 900 13px var(--sans); color: var(--night); background: var(--pin, var(--lemon));
+  box-shadow: 0 0 0 3px rgba(18,6,42,.9), 0 0 14px var(--pin, var(--lemon)); }
+.pin.letter { width: 30px; height: 30px; font-size: 14px; }
+figcaption { font-size: 12px; color: var(--faint); margin-top: 6px; text-align: center; }
+
+/* Legends */
+.legend { display: grid; gap: 8px 22px; margin: 4px 0 6px; }
+.legend.cols { grid-template-columns: 1fr 1fr; }
+.item { display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: start; }
+.item .n { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font: 900 12px var(--sans);
+  color: var(--night); background: var(--pin, var(--lemon)); margin-top: 1px; }
+.item .t { font-weight: 800; color: #fff; letter-spacing: .02em; }
+.item .d { font-size: 13.5px; color: #dccdf3; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 6px 0 12px; }
+th { text-align: left; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); padding: 6px 10px; border-bottom: 1px solid var(--edge); }
+td { padding: 8px 10px; border-bottom: 1px solid rgba(61,29,107,.6); vertical-align: top; }
+td:first-child { font-weight: 800; color: #fff; white-space: nowrap; }
+table.wrap td:first-child { white-space: normal; }
+table.steps5 td, table.steps5 th { text-align: center; white-space: nowrap; }
+table.steps5 td:first-child { text-align: left; }
+table.steps5 .home { color: var(--pink); }
+
+/* Cover */
+.cover { display: flex; flex-direction: column; padding-top: 0.85in; }
+.cover::after { display: none; }
+.cover .brand { display: flex; align-items: center; gap: 14px; font: 800 13px var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--dim); }
+.cover .brand img { width: 54px; height: 54px; border-radius: 12px; }
+.cover h1 { font: 900 104px/0.92 var(--sans); letter-spacing: -.04em; margin: 26px 0 8px; font-style: italic;
+  background: linear-gradient(180deg, #fff 0%, #ffd6f2 38%, var(--pink) 62%, var(--lavender) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 22px rgba(255,113,206,.35)); }
+.cover .tag { font-size: 21px; color: var(--text); margin: 0 0 4px; font-weight: 600; }
+.cover .tag span { color: var(--pink); }
+.cover .sub { font-family: var(--marker); font-size: 22px; color: var(--lemon); transform: rotate(-2deg); display: inline-block; margin: 8px 0 30px; }
+.cover .hero { margin: 0 -0.35in; }
+.cover .hero img { border-radius: 14px; border: 1px solid var(--edge); box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(185,103,255,.18); }
+.cover .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: end; color: var(--dim); font-size: 13px; padding-top: 30px; }
+.cover .foot .ver { font: 800 12px var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--text); border: 1px solid var(--edge); border-radius: 30px; padding: 8px 16px; }
+.flag { display: inline-flex; align-items: center; gap: 10px; font-style: italic; }
+.flag svg { width: 40px; height: 20px; }
+
+/* Contents */
+.toc { list-style: none; padding: 0; margin: 10px 0 0; counter-reset: t; }
+.toc li { display: flex; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--edge); font-size: 16px; font-weight: 600; }
+.toc li .tn { font-family: var(--marker); color: var(--lemon); width: 28px; font-size: 18px; }
+.toc li .tp { margin-left: auto; color: var(--faint); font-size: 13px; }
+.toc a { color: var(--text); }
+
+/* Signal flow */
+.flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 12px 0 8px; }
+.flow .box { border-radius: 10px; padding: 9px 12px; font: 800 12.5px var(--sans); letter-spacing: .06em; text-align: center; background: var(--panel); border: 1.5px solid var(--c, var(--edge)); color: var(--c, var(--text)); box-shadow: 0 0 14px rgba(0,0,0,.3), inset 0 0 12px rgba(255,255,255,.02); }
+.flow .box small { display: block; font-weight: 500; letter-spacing: 0; color: var(--dim); font-size: 10.5px; margin-top: 2px; }
+.flow .arr { color: var(--faint); font-weight: 900; }
+.flow-label { font: 800 10.5px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--faint); margin: 14px 0 0; }
+
+/* Recipe cards */
+.recipe { background: linear-gradient(160deg, rgba(42,11,74,.95), rgba(18,6,42,.95)); border: 1px solid var(--edge); border-radius: 14px; padding: 16px; position: relative; }
+.recipe h4 { margin: 0 0 2px; font: 400 22px var(--marker); color: var(--c, var(--pink)); }
+.recipe .use { font-size: 12px; color: var(--dim); margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 700 11.5px var(--sans); border-radius: 20px; padding: 4px 10px; background: rgba(255,255,255,.05); border: 1px solid var(--edge); color: var(--text); white-space: nowrap; }
+.chip b { color: var(--c, var(--pink)); }
+
+/* Lights under the meter */
+.lights { display: grid; gap: 12px; }
+.light { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+.dot { width: 22px; height: 22px; border-radius: 50%; margin: 3px auto 0; background: var(--c); box-shadow: 0 0 0 4px rgba(18,6,42,.9), 0 0 16px var(--c); }
+.dot.off { background: #2a1d3f; box-shadow: 0 0 0 4px rgba(18,6,42,.9); }
+.dots { display: flex; gap: 10px; margin-top: 4px; }
+.dots span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--dim); }
+.dots .dot { width: 12px; height: 12px; margin: 0; box-shadow: 0 0 10px var(--c); }
+.dots .dot.off { box-shadow: none; }
+
+.toplink { position: fixed; right: 18px; bottom: 18px; background: var(--pink); color: var(--night); font-weight: 800; padding: 10px 16px; border-radius: 30px; font-size: 13px; box-shadow: 0 6px 20px rgba(255,113,206,.4); }
+.toplink:hover { text-decoration: none; }
+</style>
+</head>
+<body>
+
+<a class="toplink noprint" href="Pink-Spider-Manual.pdf">Download the PDF</a>
+
+<!-- ============================== COVER ============================== -->
+<section class="page cover" id="top">
+  <div class="brand"><img src="img/icon.png" alt="">Anti-Music</div>
+  <h1>PINK<br>SPIDER</h1>
+  <p class="tag">Console preamp <span>→</span> FET limiter <span>→</span> A/D <span>→</span> analog harmonics.</p>
+  <span class="sub">User manual</span>
+  <div class="hero"><img src="img/pink-spider.png" alt="The Pink Spider plugin window"></div>
+  <div class="foot">
+    <span class="flag">
+      <svg viewBox="0 0 40 20"><rect width="10" height="20" fill="#d8202a"/><rect x="30" width="10" height="20" fill="#d8202a"/><rect x="10" width="20" height="20" fill="#fff"/><path d="M20 3.5l1.3 2.6 1.6-.7-.6 3.6 2.2-1.9.5 1.2 2.2-.4-.8 2.4 1 .5-3.6 2.8.4 1.3-3.3-.5.1 3.2h-1l.1-3.2-3.3.5.4-1.3-3.6-2.8 1-.5-.8-2.4 2.2.4.5-1.2 2.2 1.9-.6-3.6 1.6.7z" fill="#d8202a"/></svg>
+      From Canada with love
+    </span>
+    <span class="ver">Beta · VST3 · AU · Mac &amp; Windows</span>
+  </div>
+</section>
+
+<!-- ============================== CONTENTS ============================== -->
+<section class="page" data-footer="Pink Spider · User manual">
+  <p class="kicker">Welcome</p>
+  <h2>Thanks for testing Pink Spider</h2>
+  <p class="lede">Pink Spider is the channel you put first on every track: a console preamp, a tube stage, two limiters and a converter, then four analog colours. Think of it as plugging each track into a great console before it hits your DAW.</p>
+
+  <div class="two">
+    <div>
+      <h3 style="--accent:var(--cyan)">In this manual</h3>
+      <ol class="toc">
+        <li><span class="tn">1</span><a href="#install">Install</a><span class="tp">3</span></li>
+        <li><span class="tn">2</span><a href="#quickstart">Quick start</a><span class="tp">5</span></li>
+        <li><span class="tn">3</span><a href="#tour">A tour of the window</a><span class="tp">6</span></li>
+        <li><span class="tn">4</span><a href="#track">Low cut &amp; phase</a><span class="tp">7</span></li>
+        <li><span class="tn">5</span><a href="#display">Display &amp; tilt EQ</a><span class="tp">8</span></li>
+        <li><span class="tn">6</span><a href="#spider">The Spider section</a><span class="tp">9</span></li>
+        <li><span class="tn">7</span><a href="#fet">FET LIMIT</a><span class="tp">10</span></li>
+        <li><span class="tn">8</span><a href="#harmonic">Harmonic processing</a><span class="tp">11</span></li>
+        <li><span class="tn">9</span><a href="#meter">Meter &amp; lights</a><span class="tp">12</span></li>
+        <li><span class="tn">10</span><a href="#recipes">Sounds to try</a><span class="tp">13</span></li>
+        <li><span class="tn">11</span><a href="#help">Troubleshooting &amp; uninstall</a><span class="tp">14</span></li>
+        <li><span class="tn">12</span><a href="#feedback">Report a bug</a><span class="tp">15</span></li>
+      </ol>
+    </div>
+    <div>
+      <h3 style="--accent:var(--mint)">What you get</h3>
+      <div class="card">
+        <table>
+          <tr><th>Computer</th><th>Formats</th></tr>
+          <tr><td>Mac</td><td>VST3 and Audio Unit<br><span class="small">macOS 11 or newer, Apple Silicon or Intel</span></td></tr>
+          <tr><td>Windows</td><td>VST3<br><span class="small">Windows 10 or 11, 64-bit</span></td></tr>
+        </table>
+        <p class="small" style="margin:0">Works in Logic Pro, GarageBand, Ableton Live, Cubase, Reaper, Studio One, Bitwig, FL Studio and other VST3 / AU hosts. The Pro Tools (AAX) version comes later.</p>
+      </div>
+
+      <h3 style="--accent:var(--lemon)">This is a beta</h3>
+      <p>Pink Spider is close to finished, but not quite. Things may break or change between versions. <strong>Please tell us about anything odd</strong>, however small: see <a href="#feedback">Report a bug</a>.</p>
+      <div class="note tip"><b class="lbl">Download</b>Installers and updates are always at<br><a href="https://github.com/lilPZmods/Pink-Spider-Beta/releases/latest">github.com/lilPZmods/Pink-Spider-Beta</a></div>
+    </div>
+  </div>
+  <span class="pageno">2</span>
+</section>
+
+<!-- ============================== INSTALL ============================== -->
+<section class="page" id="install" data-footer="Pink Spider · Install" style="--accent:var(--cyan)">
+  <p class="kicker">Chapter 1</p>
+  <h2><span class="num">1</span>Install</h2>
+  <p class="lede">Download the installer for your computer from the <a href="https://github.com/lilPZmods/Pink-Spider-Beta/releases/latest">Releases page</a>, then follow the steps below. It takes about a minute.</p>
+
+  <h3>On a Mac</h3>
+  <p>File: <code>Pink-Spider-&lt;version&gt;-macOS.pkg</code></p>
+  <ol class="steps">
+    <li><strong>Quit your DAW.</strong></li>
+    <li><strong>Double-click the installer.</strong></li>
+    <li>If macOS says it <em>can't be opened</em> or <em>Apple could not verify</em> it, click <strong>Done</strong>. Then open <strong>System Settings → Privacy &amp; Security</strong>, scroll down to the message about the Pink Spider installer, and click <strong>Open Anyway</strong>. Enter your password and click <strong>Open</strong>.</li>
+    <li><strong>Follow the installer.</strong> It installs both the VST3 and the Audio Unit. Click <strong>Customize</strong> if you only want one.</li>
+    <li><strong>Open your DAW</strong> and look for <strong>Pink Spider</strong> under <strong>Anti-Music</strong>.</li>
+  </ol>
+  <div class="note warn"><b class="lbl">Why the warning?</b>Beta installers aren't signed by Apple yet, so macOS asks you to confirm. That's expected, and it only happens the first time. On macOS 12 and earlier, you can instead <strong>right-click</strong> the installer and choose <strong>Open</strong>.</div>
+
+  <p class="small">The plugins go to <code>/Library/Audio/Plug-Ins/VST3/Pink Spider.vst3</code> and <code>/Library/Audio/Plug-Ins/Components/Pink Spider.component</code>.</p>
+  <span class="pageno">3</span>
+</section>
+
+<section class="page" data-footer="Pink Spider · Install" style="--accent:var(--cyan)">
+  <h3>On Windows</h3>
+  <p>File: <code>Pink-Spider-&lt;version&gt;-Windows-Setup.exe</code></p>
+  <ol class="steps">
+    <li><strong>Quit your DAW.</strong></li>
+    <li><strong>Double-click the installer.</strong></li>
+    <li>If you see <strong>"Windows protected your PC"</strong>, click <strong>More info</strong>, then <strong>Run anyway</strong>.</li>
+    <li>Click <strong>Yes</strong> to allow changes, accept the beta licence, then click <strong>Install</strong>.</li>
+    <li><strong>Open your DAW</strong> and rescan plugins if it doesn't do it automatically. Pink Spider is listed under <strong>Anti-Music</strong>.</li>
+  </ol>
+  <div class="note warn"><b class="lbl">Why the warning?</b>The beta installer isn't signed yet, so Windows SmartScreen asks before running it. That's expected.</div>
+  <p class="small">The plugin goes to <code>C:\Program Files\Common Files\VST3\Pink Spider.vst3</code>, the standard folder every Windows DAW checks.</p>
+
+  <h3 style="--accent:var(--mint)">Updating to a newer beta</h3>
+  <p>Just run the new installer. It replaces the old version, and your sessions keep their Pink Spider settings.</p>
+
+  <h3 style="--accent:var(--lemon)">Rescanning in your DAW</h3>
+  <table>
+    <tr><th>DAW</th><th>What to do</th></tr>
+    <tr><td>Ableton Live</td><td>Settings → Plug-Ins → turn on <strong>Use VST3 Plug-In System Folders</strong>, then <strong>Rescan</strong>.</td></tr>
+    <tr><td>Logic Pro / GarageBand</td><td>Restart. Logic checks new Audio Units on launch.</td></tr>
+    <tr><td>Reaper</td><td>Preferences → Plug-ins → VST → <strong>Re-scan</strong>.</td></tr>
+    <tr><td>FL Studio</td><td>Options → Manage plugins → <strong>Find plugins</strong>.</td></tr>
+    <tr><td>Cubase, Studio One, Bitwig</td><td>Restart. They scan on launch.</td></tr>
+  </table>
+  <span class="pageno">4</span>
+</section>
+
+<!-- ============================== QUICK START ============================== -->
+<section class="page" id="quickstart" data-footer="Pink Spider · Quick start" style="--accent:var(--pink)">
+  <p class="kicker">Chapter 2</p>
+  <h2><span class="num">2</span>Quick start</h2>
+  <p class="lede">Sound in thirty seconds.</p>
+  <ol class="steps" style="--accent:var(--pink)">
+    <li><strong>Put Pink Spider on a track, first in the chain.</strong> When it opens, it does <em>nothing</em> to your sound: everything starts off or neutral.</li>
+    <li><strong>Add colour.</strong> Turn <strong>TRIODE</strong> or <strong>TAPE</strong> up to about <strong>4</strong>.</li>
+    <li><strong>Thicken it.</strong> Light <strong>FATTER</strong> for a warmer, fuller middle.</li>
+    <li><strong>Drive the preamp.</strong> Click <strong>GAIN</strong> to <strong>More</strong>, then pull <strong>LEVEL</strong> down until it's as loud as before.</li>
+    <li><strong>Control it.</strong> Light <strong>FET LIMIT</strong> for 1176-style attitude.</li>
+  </ol>
+  <div class="note tip"><b class="lbl">Hear what it's doing</b>Click the round lens next to <strong>SPIDER</strong> or <strong>HARMONIC PROCESSING</strong> to switch that whole section off and on.</div>
+
+  <h3 style="--accent:var(--cyan)">How the sound flows</h3>
+  <p class="flow-label">The Spider section</p>
+  <div class="flow">
+    <div class="box">INPUT</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--pink)">PHASE</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--pink)">GAIN<small>preamp</small></div><span class="arr">→</span>
+    <div class="box" style="--c:var(--lavender)">LEVEL</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--lemon)">LOW CUT</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--sunset)">FATTER</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--lemon)">BRICK WALL</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--cyan)">FET LIMIT</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--mint)">A/D</div>
+  </div>
+  <p class="flow-label">Harmonic processing</p>
+  <div class="flow">
+    <div class="box" style="--c:var(--sunset)">IRON</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--pink)">TRIODE</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--cyan)">PENTODE</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--lemon)">TAPE</div><span class="arr">→</span>
+    <div class="box" style="--c:var(--lavender)">TILT EQ<small>unless PRE</small></div><span class="arr">→</span>
+    <div class="box">OUTPUT</div>
+  </div>
+  <ul>
+    <li><strong>LEVEL comes before the limiters and the A/D.</strong> It decides how hard you hit FET LIMIT, BRICK WALL and the converter. Turning LEVEL up means more limiting, not only more volume.</li>
+    <li>The four harmonic colours come <strong>after</strong> the converter, like an outboard box on the insert.</li>
+    <li>The <strong>tilt EQ</strong> runs last. Light <strong>PRE</strong> to put it first instead.</li>
+  </ul>
+  <span class="pageno">5</span>
+</section>
+
+<!-- ============================== TOUR ============================== -->
+<section class="page" id="tour" data-footer="Pink Spider · A tour of the window" style="--accent:var(--lavender)">
+  <p class="kicker">Chapter 3</p>
+  <h2><span class="num">3</span>A tour of the window</h2>
+  <p class="lede" style="margin-bottom:14px">Everything is on one screen.</p>
+  <div class="fig" style="margin:6px 0.3in 14px">
+    <img src="img/pink-spider.png" alt="Pink Spider overview">
+    <span class="pin letter" style="left:63.5%;top:5.5%;--pin:var(--lavender)">A</span>
+    <span class="pin letter" style="left:13.5%;top:16.5%;--pin:var(--lemon)">B</span>
+    <span class="pin letter" style="left:27.5%;top:15%;--pin:var(--cyan)">C</span>
+    <span class="pin letter" style="left:38%;top:45.5%;--pin:var(--pink)">D</span>
+    <span class="pin letter" style="left:45.5%;top:74%;--pin:var(--sunset)">E</span>
+    <span class="pin letter" style="left:90%;top:15%;--pin:var(--mint)">F</span>
+  </div>
+  <div class="legend cols">
+    <div class="item" style="--pin:var(--lavender)"><span class="n">A</span><div><div class="t">Top bar</div><div class="d">Your track name on console tape.</div></div></div>
+    <div class="item" style="--pin:var(--lemon)"><span class="n">B</span><div><div class="t">Low cut &amp; phase</div><div class="d">Clean up the lows and line up your mics. <a href="#track">Chapter 4</a>.</div></div></div>
+    <div class="item" style="--pin:var(--cyan)"><span class="n">C</span><div><div class="t">Spectrum display</div><div class="d">See your sound, and tilt its tone. <a href="#display">Chapter 5</a>.</div></div></div>
+    <div class="item" style="--pin:var(--pink)"><span class="n">D</span><div><div class="t">Spider section</div><div class="d">Preamp, level, FATTER and FET LIMIT. <a href="#spider">Chapters 6</a> and <a href="#fet">7</a>.</div></div></div>
+    <div class="item" style="--pin:var(--sunset)"><span class="n">E</span><div><div class="t">Harmonic processing</div><div class="d">Iron, triode, pentode and tape. <a href="#harmonic">Chapter 8</a>.</div></div></div>
+    <div class="item" style="--pin:var(--mint)"><span class="n">F</span><div><div class="t">A/D meter &amp; lights</div><div class="d">Converter level, CLIP, OVER and the BRICK WALL switch. <a href="#meter">Chapter 9</a>.</div></div></div>
+  </div>
+  <h3>Handy everywhere</h3>
+  <ul>
+    <li><strong>Drag</strong> a knob up or down to turn it, or <strong>click its value box</strong> to type a value. <strong>Double-click</strong> a knob to reset it.</li>
+    <li>A <strong>lit lens</strong> means on. The lens next to a section's title switches the whole section.</li>
+    <li>Every copy keeps <strong>its own settings</strong>, and latency is only a few samples, so use one on every track and record through it.</li>
+  </ul>
+  <span class="pageno">6</span>
+</section>
+
+<!-- ============================== LOW CUT & PHASE ============================== -->
+<section class="page" id="track" data-footer="Pink Spider · Low cut &amp; phase" style="--accent:var(--lemon)">
+  <p class="kicker">Chapter 4</p>
+  <h2><span class="num">4</span>Low cut &amp; phase</h2>
+  <p class="lede">Clean up the bottom end, and make two mics on one source work together.</p>
+  <div class="two" style="grid-template-columns: 2.55in 1fr; align-items:start">
+    <div class="fig">
+      <img src="img/track.png" alt="Low cut and phase panel">
+      <span class="pin" style="left:51%;top:6.4%">1</span>
+      <span class="pin" style="left:9%;top:15%">2</span>
+      <span class="pin" style="left:91%;top:15%">3</span>
+      <span class="pin" style="left:90%;top:30%">4</span>
+      <span class="pin" style="left:90%;top:73.5%">5</span>
+      <span class="pin" style="left:2.5%;top:77.5%">6</span>
+      <span class="pin" style="left:96%;top:77.5%">7</span>
+      <span class="pin" style="left:76%;top:88%">8</span>
+    </div>
+    <div>
+      <div class="legend">
+        <div class="item"><span class="n">1</span><div><div class="t">LOW CUT</div><div class="d">Switches the low cut in or out. It starts out.</div></div></div>
+        <div class="item"><span class="n">2</span><div><div class="t">FREQ</div><div class="d">Where it cuts: 30, 50, 80, 100, 160 or 300 Hz.</div></div></div>
+        <div class="item"><span class="n">3</span><div><div class="t">SLOPE</div><div class="d">How steeply: 6, 12, 18 or 24 dB per octave. Bigger numbers cut harder.</div></div></div>
+        <div class="item"><span class="n">4</span><div><div class="t">Phase scope</div><div class="d">Your stereo image. A <strong>vertical line</strong> is mono. <strong>Spread sideways</strong> is wide. <strong>Lying flat</strong> means out of phase: hollow, and it can vanish in mono.</div></div></div>
+        <div class="item"><span class="n">5</span><div><div class="t">CORRELATION</div><div class="d"><strong>+1</strong> is mono and safe, around <strong>0</strong> is very wide, <strong>left of centre</strong> is out of phase.</div></div></div>
+        <div class="item"><span class="n">6</span><div><div class="t">PHASE</div><div class="d">Switches the phase section in or out.</div></div></div>
+        <div class="item"><span class="n">7</span><div><div class="t">180 / VAR</div><div class="d"><strong>180</strong> flips the waveform upside down. <strong>VAR</strong> rotates the phase by the ANGLE knob. Picking either switches PHASE on.</div></div></div>
+        <div class="item"><span class="n">8</span><div><div class="t">ANGLE</div><div class="d">0° to 360°, in VAR only. It clicks into place at 180°.</div></div></div>
+      </div>
+      <div class="note tip"><b class="lbl">Try this</b>Low cut: vocals 80–100 Hz at 12 dB, guitars 80 Hz, overheads 160 Hz. Two mics on one source: try <strong>180</strong>, or pick <strong>VAR</strong> and sweep <strong>ANGLE</strong> until the low end sounds fullest.</div>
+    </div>
+  </div>
+  <span class="pageno">7</span>
+</section>
+
+<!-- ============================== DISPLAY ============================== -->
+<section class="page" id="display" data-footer="Pink Spider · Display &amp; tilt EQ" style="--accent:var(--cyan)">
+  <p class="kicker">Chapter 5</p>
+  <h2><span class="num">5</span>Display &amp; tilt EQ</h2>
+  <p class="lede">See the frequencies in your sound, and tilt the whole tone brighter or darker with one gesture.</p>
+  <div class="fig">
+    <img src="img/display.png" alt="Spectrum display">
+    <span class="pin" style="left:33%;top:42%;--pin:var(--cyan)">1</span>
+    <span class="pin" style="left:87.5%;top:24%;--pin:var(--cyan)">2</span>
+    <span class="pin" style="left:62.5%;top:12.5%;--pin:var(--cyan)">3</span>
+    <span class="pin" style="left:82%;top:81%;--pin:var(--cyan)">4</span>
+  </div>
+  <div class="legend cols" style="--pin:var(--cyan)">
+    <div class="item"><span class="n">1</span><div><div class="t">Spectrum</div><div class="d">Lowest bass on the left, highest treble on the right. Faint purple is your sound <strong>before</strong> Pink Spider, bright blue is <strong>after</strong>.</div></div></div>
+    <div class="item"><span class="n">2</span><div><div class="t">RTA label</div><div class="d">Click it to switch between <strong>IN + OUT</strong>, <strong>IN</strong>, <strong>OUT</strong> and <strong>OFF</strong>.</div></div></div>
+    <div class="item"><span class="n">3</span><div><div class="t">PRE</div><div class="d">Moves the tilt EQ to the <strong>start</strong> of the chain, so it changes what goes into the preamp and harmonics.</div></div></div>
+    <div class="item"><span class="n">4</span><div><div class="t">Tilt amount</div><div class="d">Shows while the tilt isn't flat, with the curve drawn over the spectrum.</div></div></div>
+  </div>
+
+  <h3>Using the tilt EQ</h3>
+  <p>The tilt EQ works like a seesaw around 500 Hz: when the treble goes up, the bass goes down, and the other way round. Up to ±6 dB at each end.</p>
+  <table>
+    <tr><th style="width:42%">Do this</th><th>Result</th></tr>
+    <tr><td>Hold <kbd>Shift</kbd> and drag <strong>up</strong> on the spectrum</td><td><strong>Brighter</strong>: more treble, less bass</td></tr>
+    <tr><td>Hold <kbd>Shift</kbd> and drag <strong>down</strong></td><td><strong>Darker</strong>: more bass, less treble</td></tr>
+    <tr><td><strong>Right-click</strong> the spectrum → <strong>Reset Tilt</strong></td><td>Back to flat. It also clicks into place at flat as you drag.</td></tr>
+  </table>
+  <div class="note tip"><b class="lbl">Try this</b>A slightly <strong>darker</strong> tilt with <strong>PRE</strong> lit makes the preamp and harmonics distort more smoothly, with less fizz.</div>
+  <span class="pageno">8</span>
+</section>
+
+<!-- ============================== SPIDER ============================== -->
+<section class="page" id="spider" data-footer="Pink Spider · The Spider section" style="--accent:var(--pink)">
+  <p class="kicker">Chapter 6</p>
+  <h2><span class="num">6</span>The Spider section</h2>
+  <p class="lede">The console channel: a preamp, a level control and a tube stage, feeding the limiters and the converter.</p>
+  <div class="fig">
+    <img src="img/spider.png" alt="Spider section">
+    <span class="pin" style="left:15.5%;top:10.5%;--pin:var(--pink)">1</span>
+    <span class="pin" style="left:24%;top:33%;--pin:var(--pink)">2</span>
+    <span class="pin" style="left:48%;top:33%;--pin:var(--pink)">3</span>
+    <span class="pin" style="left:70%;top:44%;--pin:var(--pink)">4</span>
+    <span class="pin" style="left:72.5%;top:66%;--pin:var(--pink)">5</span>
+  </div>
+  <div class="legend cols" style="--pin:var(--pink)">
+    <div class="item"><span class="n">1</span><div><div class="t">SPIDER</div><div class="d">Switches the whole section in or out. While it's out, the panel greys over; low cut, phase and harmonics keep working.</div></div></div>
+    <div class="item"><span class="n">2</span><div><div class="t">GAIN</div><div class="d">The console preamp. Five clicks, from <strong>6</strong> to <strong>66</strong>. Starts at <strong>Unity</strong>.</div></div></div>
+    <div class="item"><span class="n">3</span><div><div class="t">LEVEL</div><div class="d">The channel output, −60 to +12 dB. Sets how hard the limiters and the A/D are hit.</div></div></div>
+    <div class="item"><span class="n">4</span><div><div class="t">FATTER</div><div class="d">A tube stage: thicker and warmer, mostly 2nd harmonic. Quiet parts stay clean, loud parts get fatter.</div></div></div>
+    <div class="item"><span class="n">5</span><div><div class="t">FET LIMIT</div><div class="d">An 1176-style limiter in front of the converter. <a href="#fet">Chapter 7</a>.</div></div></div>
+  </div>
+
+  <h3>GAIN</h3>
+  <table class="steps5">
+    <tr><th>Position</th><th>6</th><th>Less</th><th class="home">Unity</th><th>More</th><th>66</th></tr>
+    <tr><td>Into the preamp</td><td>−30 dB</td><td>−15 dB</td><td class="home"><strong>no change</strong></td><td>+15 dB</td><td>+30 dB</td></tr>
+  </table>
+  <div class="note"><b class="lbl">GAIN up, LEVEL down</b>More GAIN drives the preamp, FATTER, the limiters and the converter harder. Turn <strong>LEVEL</strong> down by about the same amount so you're comparing tone, not loudness. Switching GAIN never clicks or jumps.</div>
+  <span class="pageno">9</span>
+</section>
+
+<!-- ============================== FET LIMIT ============================== -->
+<section class="page" id="fet" data-footer="Pink Spider · FET LIMIT" style="--accent:var(--cyan)">
+  <p class="kicker">Chapter 7</p>
+  <h2><span class="num">7</span>FET LIMIT</h2>
+  <p class="lede">A limiter modelled on the classic 1176 "blue stripe", set up the way many engineers love it, and placed right in front of the converter.</p>
+
+  <div class="card">
+    <table style="margin:0">
+      <tr><th>Setting</th><th>Value</th><th>What you hear</th></tr>
+      <tr><td>Ratio</td><td>20:1, always</td><td>Full limiting. It holds the level firmly.</td></tr>
+      <tr><td>Attack</td><td>Slowest (about 800 µs)</td><td>The <strong>front of each hit punches through</strong> before it clamps.</td></tr>
+      <tr><td>Release</td><td>Fastest (50 ms)</td><td>Lively and aggressive. It stretches a little, to about 120 ms, when it's limiting hard and long.</td></tr>
+      <tr><td>Where it starts</td><td>About −3 dBFS</td><td>Keeps the converter from going over.</td></tr>
+    </table>
+  </div>
+
+  <h3>How to use it</h3>
+  <ol class="steps" style="--accent:var(--cyan)">
+    <li>Light <strong>FET LIMIT</strong>.</li>
+    <li>Turn <strong>LEVEL</strong> up. The more you push, the harder it grabs.</li>
+    <li>For more attitude, click <strong>GAIN</strong> to <strong>More</strong> as well.</li>
+    <li>Switch it off and on to compare at the same loudness.</li>
+  </ol>
+
+  <h3>What it does to the sound</h3>
+  <ul>
+    <li>Like the real one, it is a <strong>feedback</strong> design: it listens to its own output, so the first moment of a peak gets through before it clamps.</li>
+    <li>As it limits harder, the FET adds a little <strong>2nd harmonic</strong>, the warm edge the 1176 is known for.</li>
+    <li>The fast release rides low notes slightly, which adds growl on bass and drums.</li>
+  </ul>
+  <div class="note tip"><b class="lbl">Great on</b>Vocals, bass, room mics and drum busses.</div>
+  <div class="note"><b class="lbl">FET LIMIT or BRICK WALL?</b><strong>FET LIMIT</strong> is the sound: colour and squash. <strong>BRICK WALL</strong> is the safety net: it just catches peaks. You can use both. BRICK WALL is switched from the light under the meter: see <a href="#meter">Chapter 9</a>.</div>
+  <span class="pageno">10</span>
+</section>
+
+<!-- ============================== HARMONIC ============================== -->
+<section class="page" id="harmonic" data-footer="Pink Spider · Harmonic processing" style="--accent:var(--sunset)">
+  <p class="kicker">Chapter 8</p>
+  <h2><span class="num">8</span>Harmonic processing</h2>
+  <p class="lede">Four analog colours after the converter, in this order: iron, triode, pentode, tape. Use one, or stack them.</p>
+  <div class="fig">
+    <img src="img/harmonic.png" alt="Harmonic processing">
+    <span class="pin" style="left:29.5%;top:10.5%;--pin:var(--sunset)">1</span>
+    <span class="pin" style="left:20.5%;top:33%;--pin:var(--sunset)">2</span>
+    <span class="pin" style="left:44%;top:33%;--pin:var(--sunset)">3</span>
+    <span class="pin" style="left:68%;top:33%;--pin:var(--sunset)">4</span>
+    <span class="pin" style="left:90.5%;top:33%;--pin:var(--sunset)">5</span>
+  </div>
+  <div class="legend" style="--pin:var(--sunset)">
+    <div class="item"><span class="n">1</span><div><div class="t">HARMONIC PROCESSING</div><div class="d">Switches all four in or out together.</div></div></div>
+    <div class="item"><span class="n">2</span><div><div class="t">IRON</div><div class="d">An input transformer: <strong>thicker, tighter lows</strong> while the highs stay open. For kick, bass, anything that needs weight.</div></div></div>
+    <div class="item"><span class="n">3</span><div><div class="t">TRIODE</div><div class="d"><strong>Warm, round and fat</strong> (even harmonics). For vocals, acoustic guitar, anything thin.</div></div></div>
+    <div class="item"><span class="n">4</span><div><div class="t">PENTODE</div><div class="d"><strong>Brighter, more detail, a bit of squash</strong> (odd harmonics). For vocals that need to cut, snare, guitars.</div></div></div>
+    <div class="item"><span class="n">5</span><div><div class="t">TAPE</div><div class="d"><strong>Tape saturation</strong>: the highs soften first, with a low-end bump. For drums, busses, taming harsh sources.</div></div></div>
+  </div>
+
+  <h3>How far to turn them</h3>
+  <table class="steps5">
+    <tr><th>Knob</th><th>OFF</th><th>1 to 3</th><th class="home">4 to 6</th><th>7 to 10</th></tr>
+    <tr><td>Sounds</td><td>Fully left, clicks in</td><td>Subtle: you feel it</td><td class="home"><strong>Clearly coloured</strong></td><td>Heavy, into distortion</td></tr>
+  </table>
+  <div class="note"><b class="lbl">No overs</b>These four never cause an over. Pushing them makes the sound denser and louder, but peaks stay below full scale.</div>
+  <span class="pageno">11</span>
+</section>
+
+<!-- ============================== METER ============================== -->
+<section class="page" id="meter" data-footer="Pink Spider · Meter &amp; lights" style="--accent:var(--mint)">
+  <p class="kicker">Chapter 9</p>
+  <h2><span class="num">9</span>Meter &amp; lights</h2>
+  <p class="lede">The level hitting the converter, and three lights that tell you when to back off.</p>
+  <div class="two" style="grid-template-columns: 1.55in 1fr; gap:34px; align-items:start">
+    <div class="fig">
+      <img src="img/meter.png" alt="A/D meter">
+      <span class="pin" style="left:85%;top:4%;--pin:var(--mint)">1</span>
+      <span class="pin" style="left:22%;top:99.5%;--pin:var(--mint)">2</span>
+      <span class="pin" style="left:49%;top:99.5%;--pin:var(--mint)">3</span>
+      <span class="pin" style="left:76%;top:99.5%;--pin:var(--mint)">4</span>
+    </div>
+    <div>
+      <h3 style="margin-top:0">1 · The A/D meter</h3>
+      <p>Shows the peak level going into the converter, in dBFS, for each channel. <strong>Green</strong> is healthy. <strong>Yellow</strong> is getting hot. The top segment, <strong>OVR</strong>, means a digital over.</p>
+
+      <h3>The lights</h3>
+      <div class="lights">
+        <div class="light" style="--c:var(--sunset)"><span class="dot"></span><div><div class="item" style="display:block"><div class="t">2 · CLIP</div><div class="d">The preamp is being pushed past its headroom. Click <strong>GAIN</strong> down a step.</div></div></div></div>
+        <div class="light" style="--c:var(--lemon)"><span class="dot"></span><div><div class="item" style="display:block"><div class="t">3 · BRICK WALL</div><div class="d"><strong>This light is also a switch. Click it</strong> to turn the brick-wall peak limiter on or off.</div>
+          <div class="dots"><span><i class="dot off"></i>off</span><span style="--c:var(--lemon)"><i class="dot"></i>on</span><span style="--c:var(--red)"><i class="dot"></i>limiting right now</span></div></div></div></div>
+        <div class="light" style="--c:var(--pink)"><span class="dot"></span><div><div class="item" style="display:block"><div class="t">4 · OVER</div><div class="d">The signal went over full scale at the converter. Turn <strong>LEVEL</strong> down, or light <strong>FET LIMIT</strong> or <strong>BRICK WALL</strong>.</div></div></div></div>
+      </div>
+
+      <div class="note tip"><b class="lbl">BRICK WALL</b>A fast peak limiter that catches peaks just below full scale, linked across both channels so the stereo image doesn't shift. Use it as a safety net when tracking hot.</div>
+    </div>
+  </div>
+  <span class="pageno">12</span>
+</section>
+
+<!-- ============================== RECIPES ============================== -->
+<section class="page" id="recipes" data-footer="Pink Spider · Sounds to try" style="--accent:var(--sunset)">
+  <p class="kicker">Chapter 10</p>
+  <h2><span class="num">10</span>Sounds to try</h2>
+  <p class="lede">Starting points. Begin from the defaults (double-click knobs to reset), set these, then adjust to taste.</p>
+  <div class="two" style="gap:16px">
+    <div class="recipe" style="--c:var(--pink)">
+      <h4>Lead vocal</h4>
+      <div class="use">Present, controlled, warm</div>
+      <div class="chips"><span class="chip"><b>LOW CUT</b> 80 Hz / 12 dB</span><span class="chip"><b>GAIN</b> More</span><span class="chip"><b>LEVEL</b> down to match</span><span class="chip"><b>FET LIMIT</b> on</span><span class="chip"><b>TRIODE</b> 3</span><span class="chip"><b>PENTODE</b> 2</span></div>
+    </div>
+    <div class="recipe" style="--c:var(--sunset)">
+      <h4>Bass</h4>
+      <div class="use">Weight and growl that sits</div>
+      <div class="chips"><span class="chip"><b>GAIN</b> More</span><span class="chip"><b>FATTER</b> on</span><span class="chip"><b>IRON</b> 4</span><span class="chip"><b>TAPE</b> 3</span><span class="chip"><b>FET LIMIT</b> on</span></div>
+    </div>
+    <div class="recipe" style="--c:var(--lemon)">
+      <h4>Kick</h4>
+      <div class="use">Tight low end, safe peaks</div>
+      <div class="chips"><span class="chip"><b>IRON</b> 5</span><span class="chip"><b>TRIODE</b> 3</span><span class="chip"><b>BRICK WALL</b> on</span></div>
+    </div>
+    <div class="recipe" style="--c:var(--cyan)">
+      <h4>Snare</h4>
+      <div class="use">Crack and body</div>
+      <div class="chips"><span class="chip"><b>PENTODE</b> 4</span><span class="chip"><b>TAPE</b> 3</span><span class="chip"><b>Bottom mic</b> 180</span></div>
+    </div>
+    <div class="recipe" style="--c:var(--mint)">
+      <h4>Acoustic guitar</h4>
+      <div class="use">Full without the boom</div>
+      <div class="chips"><span class="chip"><b>LOW CUT</b> 100 Hz</span><span class="chip"><b>TRIODE</b> 3</span><span class="chip"><b>TILT</b> a little brighter</span></div>
+    </div>
+    <div class="recipe" style="--c:var(--lavender)">
+      <h4>Electric guitar</h4>
+      <div class="use">Bite and glue</div>
+      <div class="chips"><span class="chip"><b>LOW CUT</b> 80 Hz</span><span class="chip"><b>PENTODE</b> 3</span><span class="chip"><b>TAPE</b> 2</span></div>
+    </div>
+    <div class="recipe" style="--c:var(--red)">
+      <h4>Smashed room</h4>
+      <div class="use">Drum room mics, parallel crush</div>
+      <div class="chips"><span class="chip"><b>GAIN</b> More</span><span class="chip"><b>FET LIMIT</b> on</span><span class="chip"><b>LEVEL</b> up until it pumps</span><span class="chip"><b>TAPE</b> 4</span></div>
+    </div>
+    <div class="recipe" style="--c:var(--cyan)">
+      <h4>Mix bus</h4>
+      <div class="use">Gentle glue and colour</div>
+      <div class="chips"><span class="chip"><b>GAIN</b> Unity</span><span class="chip"><b>IRON</b> 2</span><span class="chip"><b>TAPE</b> 2 to 3</span><span class="chip"><b>TILT</b> to taste</span></div>
+    </div>
+  </div>
+  <span class="pageno">13</span>
+</section>
+
+<!-- ============================== TROUBLESHOOTING ============================== -->
+<section class="page" id="help" data-footer="Pink Spider · Troubleshooting &amp; uninstall" style="--accent:var(--sunset)">
+  <p class="kicker">Chapter 11</p>
+  <h2><span class="num">11</span>Troubleshooting</h2>
+  <p class="lede">Most problems have a quick fix.</p>
+  <table class="wrap">
+    <tr><th style="width:38%">Problem</th><th>Fix</th></tr>
+    <tr><td>Pink Spider doesn't show up in my DAW</td><td>Restart the DAW and rescan plugins (see <a href="#install">Install</a>). In Logic: <strong>Logic Pro → Settings → Plug-in Manager</strong>, select Pink Spider, <strong>Reset &amp; Rescan Selection</strong>.</td></tr>
+    <tr><td>The Mac says the installer can't be opened, or is damaged</td><td>Use <strong>Open Anyway</strong> in <strong>System Settings → Privacy &amp; Security</strong>. If it still refuses, run this in Terminal, then open the installer again:<br><code>xattr -d com.apple.quarantine ~/Downloads/Pink-Spider-*-macOS.pkg</code></td></tr>
+    <tr><td>It's louder or quieter than without it</td><td>Set <strong>GAIN</strong> to <strong>Unity</strong> and <strong>LEVEL</strong> to <strong>0 dB</strong>. With FATTER, both limiters and the four harmonic knobs off, Pink Spider doesn't change your sound.</td></tr>
+    <tr><td>It sounds distorted</td><td>Watch the <strong>CLIP</strong> and <strong>OVER</strong> lights. Click GAIN down a step, lower LEVEL, or turn the harmonic knobs down.</td></tr>
+    <tr><td>The BRICK WALL light is red all the time</td><td>It's limiting constantly. Turn <strong>LEVEL</strong> down until it only flashes red on peaks.</td></tr>
+    <tr><td>Where's the Pro Tools version?</td><td>Not in this beta. The AAX version needs to be signed first. It's coming.</td></tr>
+  </table>
+
+  <h3>Uninstall</h3>
+  <div class="two">
+    <div class="card"><strong>Mac</strong><p class="small" style="margin:6px 0 0">In Finder, choose <strong>Go → Go to Folder…</strong> and delete:<br><code>/Library/Audio/Plug-Ins/VST3/Pink Spider.vst3</code><br><code>/Library/Audio/Plug-Ins/Components/Pink Spider.component</code></p></div>
+    <div class="card"><strong>Windows</strong><p class="small" style="margin:6px 0 0">Open <strong>Settings → Apps → Installed apps</strong>, find <strong>Pink Spider (Anti-Music) beta</strong>, and click <strong>Uninstall</strong>.</p></div>
+  </div>
+  <span class="pageno">14</span>
+</section>
+
+<!-- ============================== FEEDBACK ============================== -->
+<section class="page" id="feedback" data-footer="Pink Spider · Report a bug" style="--accent:var(--pink)">
+  <p class="kicker">Chapter 12</p>
+  <h2><span class="num">12</span>Report a bug</h2>
+  <p class="lede">Thank you for testing. Please report everything, even small things. That's what the beta is for.</p>
+  <div class="card" style="text-align:center; padding:26px">
+    <p style="font-size:17px; margin:0 0 8px">Open an issue at</p>
+    <p style="font:900 24px var(--sans); margin:0"><a href="https://github.com/lilPZmods/Pink-Spider-Beta/issues/new/choose">github.com/lilPZmods/Pink-Spider-Beta/issues</a></p>
+    <p class="small" style="margin:8px 0 0">Pick <strong>Bug report</strong> or <strong>Feedback or idea</strong>. A free GitHub account is needed.</p>
+  </div>
+  <h3>For bugs, please include</h3>
+  <ul>
+    <li>Your computer (Mac or Windows) and its OS version</li>
+    <li>Your DAW and its version</li>
+    <li>The Pink Spider version (it's in the installer's file name)</li>
+    <li>What you did, what you expected, and what happened</li>
+    <li>A screenshot or short recording, if you can</li>
+    <li>If your DAW crashed, its crash report, if it made one</li>
+  </ul>
+
+  <div style="margin-top:0.9in; text-align:center">
+    <img src="img/icon.png" alt="" style="width:90px; margin:0 auto 14px; border-radius:18px">
+    <p style="font-family:var(--marker); font-size:30px; color:var(--lemon); margin:0">Now go make it sound expensive.</p>
+    <p class="small" style="margin-top:14px">Pink Spider © 2026 Anti-Music · Beta software, provided as is. See the licence in the installer.<br>
+      Built with JUCE. VST is a trademark of Steinberg Media Technologies GmbH. Permanent Marker font by Font Diner (Apache 2.0).<br>
+      Crane Song, Spider, HEDD, UREI and 1176 are trademarks of their owners, mentioned only to describe the style of processing.<br>Pink Spider is not affiliated with or endorsed by them.</p>
+    <p class="flag small" style="justify-content:center; display:flex; margin-top:10px">From Canada with love</p>
+  </div>
+  <span class="pageno">15</span>
+</section>
+
+</body>
+</html>
