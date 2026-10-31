@@ -1,9 +1,6 @@
-# Pink Spider (beta)
+# Pink Spider (beta) by Anti-Music
 
-A tool to enhance harmonic content.
-
-Built for any track or master bus processing.
-VST3 and Audio Unit, for Mac and Windows.
+**The channel you put first on every track:** a console preamp, a tube stage, an 1176-style FET limiter and a converter, then four analog colours (iron, triode, pentode, tape). VST3 and Audio Unit, for Mac and Windows.
 
 ![Pink Spider](images/pink-spider.png)
 
@@ -16,14 +13,28 @@ VST3 and Audio Unit, for Mac and Windows.
 | Mac (macOS 11+, Apple Silicon or Intel) | `Pink-Spider-<version>-macOS.pkg` | VST3, Audio Unit |
 | Windows (10 / 11, 64-bit) | `Pink-Spider-<version>-Windows-Setup.exe` | VST3 |
 
-Pro Tools (AAX) in development.
+Pro Tools (AAX) comes later.
 
-## Install instructions
+### Pink Spider-DMP (digital mic pre)
+
+A separate plugin: the same channel with the Spider mic pre's real **6 / 21 / 36 / 51 / 66 dB** of gain, for a mic plugged into a line-level input. Install it alongside Pink Spider or on its own.
+
+| Your computer | Download | Formats |
+|---|---|---|
+| Mac (macOS 11+, Apple Silicon or Intel) | `Pink-Spider-DMP-<version>-macOS.pkg` | VST3, Audio Unit |
+| Windows (10 / 11, 64-bit) | `Pink-Spider-DMP-<version>-Windows-Setup.exe` | VST3 |
+
+Digital gain after a line-level converter raises its noise too, so it's best for close-miked, loud sources; set the interface input to its most sensitive level.
+
+## Install in three steps
 
 1. Quit your DAW and run the installer.
    - **Mac:** if macOS says it can't verify the installer, go to **System Settings → Privacy & Security** and click **Open Anyway**.
    - **Windows:** if you see "Windows protected your PC", click **More info → Run anyway**.
 
+   The beta isn't signed yet, so this extra step is expected.
+2. Open your DAW and rescan plugins if needed.
+3. Add **Pink Spider** (by **Anti-Music**) as the first plugin on a track.
 
 ## Manual
 
