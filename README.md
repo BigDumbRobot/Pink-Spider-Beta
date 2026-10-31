@@ -1,4 +1,4 @@
-# Pink Spider (beta) by Anti-Music
+# Pink Spider (beta)
 
 A console preamp, tube stage, an 1176-style FET limiter + four colours (iron, triode, pentode, tape). 
 
