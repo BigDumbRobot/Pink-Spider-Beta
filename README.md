@@ -1,6 +1,6 @@
 # Pink Spider (beta)
 
-A console preamp, tube stage, an 1176-style FET limiter + four colours (iron, triode, pentode, tape). 
+A console preamp, tube stage, FET limiter + four colours (iron, triode, pentode, tape). 
 
 Built for any track or master bus processing.
 VST3 and Audio Unit, for Mac and Windows.
