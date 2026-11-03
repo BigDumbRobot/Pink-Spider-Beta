@@ -6,7 +6,7 @@
 
 ## Download
 
-**[Get the latest beta](https://github.com/lilPZmods/Pink-Spider-Beta/releases/latest)**
+**[Get the latest beta](https://github.com/BigDumbRobot/Pink-Spider-Beta/releases/latest)**
 
 | Your computer | Download | Formats |
 |---|---|---|
@@ -38,13 +38,13 @@ Digital gain after a line-level converter raises its noise too, so it's best for
 
 ## Manual
 
-**[Download the manual (PDF)](https://github.com/lilPZmods/Pink-Spider-Beta/raw/main/docs/Pink-Spider-Manual.pdf)**: install help, a tour of every control, sounds to try, and troubleshooting. It's also attached to every release.
+**[Download the manual (PDF)](https://github.com/BigDumbRobot/Pink-Spider-Beta/raw/main/docs/Pink-Spider-Manual.pdf)**: install help, a tour of every control, sounds to try, and troubleshooting. It's also attached to every release.
 
 Prefer to read it here? **[Read the manual on GitHub](MANUAL.md)**.
 
 ## Found a bug? Have an idea?
 
-**[Report it here](https://github.com/lilPZmods/Pink-Spider-Beta/issues/new/choose)**. Tell us your computer, your DAW, and what happened. Thank you for testing!
+**[Report it here](https://github.com/BigDumbRobot/Pink-Spider-Beta/issues/new/choose)**. Tell us your computer, your DAW, and what happened. Thank you for testing!
 
 ---
 

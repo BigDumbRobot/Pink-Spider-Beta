@@ -3,7 +3,7 @@
 **Pink Spider by Anti-Music**: console preamp, FET limiter, A/D and analog harmonics, in one plugin. Beta version.
 
 > [!TIP]
-> This manual is also a designed, printable PDF: **[download Pink-Spider-Manual.pdf](https://github.com/lilPZmods/Pink-Spider-Beta/raw/main/docs/Pink-Spider-Manual.pdf)**.
+> This manual is also a designed, printable PDF: **[download Pink-Spider-Manual.pdf](https://github.com/BigDumbRobot/Pink-Spider-Beta/raw/main/docs/Pink-Spider-Manual.pdf)**.
 
 ![Pink Spider](images/pink-spider.png)
 
@@ -33,7 +33,7 @@
 | **Mac** | macOS 11 Big Sur or newer, Apple Silicon or Intel. A DAW that loads **VST3** or **Audio Units** (Logic Pro, GarageBand, Ableton Live, Cubase, Reaper, Studio One, Bitwig, FL Studio...). |
 | **Windows** | Windows 10 or 11, 64-bit. A DAW that loads **VST3**. |
 
-Download the installer for your computer from the **[Releases page](https://github.com/lilPZmods/Pink-Spider-Beta/releases/latest)**:
+Download the installer for your computer from the **[Releases page](https://github.com/BigDumbRobot/Pink-Spider-Beta/releases/latest)**:
 
 - Mac: `Pink-Spider-<version>-macOS.pkg`
 - Windows: `Pink-Spider-<version>-Windows-Setup.exe`
@@ -243,7 +243,7 @@ The meter shows the peak level going into the converter: green is healthy, yello
 
 ## 12. Reporting bugs and feedback
 
-**[Open an issue](https://github.com/lilPZmods/Pink-Spider-Beta/issues/new/choose)** and pick **Bug report** or **Feedback or idea**. For bugs, please include your computer and OS version, your DAW and version, the Pink Spider version, what happened, and a screenshot if you can.
+**[Open an issue](https://github.com/BigDumbRobot/Pink-Spider-Beta/issues/new/choose)** and pick **Bug report** or **Feedback or idea**. For bugs, please include your computer and OS version, your DAW and version, the Pink Spider version, what happened, and a screenshot if you can.
 
 ---
 
