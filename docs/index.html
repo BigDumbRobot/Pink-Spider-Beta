@@ -45,6 +45,7 @@ kbd { color: var(--text); border-bottom-width: 2px; }
   .noprint { display: none !important; }
   /* Soft glows turn into solid boxes in Mac Preview: print crisp edges instead. */
   *, *::before, *::after { box-shadow: none !important; filter: none !important; }
+  h2 { background: none !important; color: var(--pink) !important; -webkit-text-fill-color: var(--pink) !important; }
   .pin, .item .n, .dot { outline: 3px solid rgba(18,6,42,.9); }
 }
 @media screen and (max-width: 900px) {
@@ -369,10 +370,10 @@ table.steps5 .home { color: var(--pink); }
     </div>
     <div>
       <div class="legend">
-        <div class="item"><span class="n">1</span><div><div class="t">LOW CUT</div><div class="d">Switches the low cut in or out. It starts out.</div></div></div>
+        <div class="item"><span class="n">1</span><div><div class="t">LOW CUT</div><div class="d">Switches the low cut in or out. Off by default.</div></div></div>
         <div class="item"><span class="n">2</span><div><div class="t">FREQ</div><div class="d">Where it cuts: 30, 50, 80, 100, 160 or 300 Hz.</div></div></div>
         <div class="item"><span class="n">3</span><div><div class="t">SLOPE</div><div class="d">How steeply: 6, 12, 18 or 24 dB per octave. Bigger numbers cut harder.</div></div></div>
-        <div class="item"><span class="n">4</span><div><div class="t">Phase scope</div><div class="d">Your stereo image. A <strong>vertical line</strong> is mono. <strong>Spread sideways</strong> is wide. <strong>Lying flat</strong> means out of phase: hollow, and it can vanish in mono.</div></div></div>
+        <div class="item"><span class="n">4</span><div><div class="t">Phase scope</div><div class="d">Shows the relationship between left and right. A <strong>vertical line</strong> is mono. <strong>Spread sideways</strong> is wide. <strong>Lying flat</strong> means out of phase: hollow, and it can vanish in mono.</div></div></div>
         <div class="item"><span class="n">5</span><div><div class="t">CORRELATION</div><div class="d"><strong>+1</strong> is mono and safe, around <strong>0</strong> is very wide, <strong>left of centre</strong> is out of phase.</div></div></div>
         <div class="item"><span class="n">6</span><div><div class="t">PHASE</div><div class="d">Switches the phase section in or out.</div></div></div>
         <div class="item"><span class="n">7</span><div><div class="t">180 / VAR</div><div class="d"><strong>180</strong> flips the waveform upside down. <strong>VAR</strong> rotates the phase by the ANGLE knob. Picking either switches PHASE on.</div></div></div>
@@ -457,7 +458,7 @@ table.steps5 .home { color: var(--pink); }
       <tr><td>Ratio</td><td>20:1, always</td><td>Full limiting. It holds the level firmly.</td></tr>
       <tr><td>Attack</td><td>Slowest (about 800 µs)</td><td>The <strong>front of each hit punches through</strong> before it clamps.</td></tr>
       <tr><td>Release</td><td>Fastest (50 ms)</td><td>Lively and aggressive. It stretches a little, to about 120 ms, when it's limiting hard and long.</td></tr>
-      <tr><td>Where it starts</td><td>About −3 dBFS</td><td>Keeps the converter from going over.</td></tr>
+      <tr><td>Where it starts</td><td>Around −3 dBFS</td><td>Transients may pass; BRICK WALL catches peaks.</td></tr>
     </table>
   </div>
 
@@ -599,7 +600,7 @@ table.steps5 .home { color: var(--pink); }
   <table class="wrap">
     <tr><th style="width:38%">Problem</th><th>Fix</th></tr>
     <tr><td>Pink Spider doesn't show up in my DAW</td><td>Restart the DAW and rescan plugins (see <a href="#install">Install</a>). In Logic: <strong>Logic Pro → Settings → Plug-in Manager</strong>, select Pink Spider, <strong>Reset &amp; Rescan Selection</strong>.</td></tr>
-    <tr><td>The Mac says the installer can't be opened, or is damaged</td><td>Use <strong>Open Anyway</strong> in <strong>System Settings → Privacy &amp; Security</strong>. If it still refuses, run this in Terminal, then open the installer again:<br><code>xattr -d com.apple.quarantine ~/Downloads/Pink-Spider-*-macOS.pkg</code></td></tr>
+    <tr><td>The Mac says the installer can't be opened, or is damaged</td><td>Use <strong>Open Anyway</strong> in <strong>System Settings → Privacy &amp; Security</strong>. If it still refuses, download a fresh copy from the <a href="https://github.com/BigDumbRobot/Pink-Spider-Beta/releases/latest">official Releases page</a> and try again.</td></tr>
     <tr><td>It's louder or quieter than without it</td><td>Set <strong>GAIN</strong> to <strong>Unity</strong> and <strong>LEVEL</strong> to <strong>0 dB</strong>. With FATTER, both limiters and the four harmonic knobs off, Pink Spider doesn't change your sound.</td></tr>
     <tr><td>It sounds distorted</td><td>Watch the <strong>CLIP</strong> and <strong>OVER</strong> lights. Click GAIN down a step, lower LEVEL, or turn the harmonic knobs down.</td></tr>
     <tr><td>The BRICK WALL light is red all the time</td><td>It's limiting constantly. Turn <strong>LEVEL</strong> down until it only flashes red on peaks.</td></tr>

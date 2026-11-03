@@ -99,10 +99,10 @@ The tilt EQ runs last. Light **PRE** to put it first instead.
 
 | Control | What it does |
 |---|---|
-| **LOW CUT** | Switches the low cut in or out. It starts out. |
+| **LOW CUT** | Switches the low cut in or out. Off by default. |
 | **FREQ** | 30, 50, 80, 100, 160 or 300 Hz. |
 | **SLOPE** | 6, 12, 18 or 24 dB per octave. Bigger numbers cut harder. |
-| **Phase scope** | Your stereo image. A vertical line is mono, spread sideways is wide, lying flat is out of phase. |
+| **Phase scope** | Shows the relationship between left and right. A vertical line is mono, spread sideways is wide, lying flat is out of phase. |
 | **CORRELATION** | +1 is mono, around 0 is very wide, left of centre is out of phase. |
 | **PHASE** | Switches the phase section in or out. |
 | **180** | Flips the waveform upside down. |
@@ -144,9 +144,9 @@ The **tilt EQ** works like a seesaw around 500 Hz, up to ±6 dB at each end:
 | **FATTER** | A tube stage: thicker and warmer, mostly 2nd harmonic. |
 | **FET LIMIT** | An 1176-style limiter in front of the converter. See [chapter 7](#7-fet-limit). |
 
-| GAIN | 6 | Less | **Unity** | More | 66 |
+| GAIN position | 6 | Less | **Unity** | More | 66 |
 |---|:---:|:---:|:---:|:---:|:---:|
-| Into the preamp | −30 dB | −15 dB | **no change** | +15 dB | +30 dB |
+| Change into the preamp | −30 dB | −15 dB | **no change** | +15 dB | +30 dB |
 
 > [!IMPORTANT]
 > **GAIN up, LEVEL down.** Turn LEVEL down by about as much as you turned GAIN up, so you're comparing tone, not loudness.
@@ -162,7 +162,7 @@ A limiter modelled on the classic **1176 "blue stripe"**, right in front of the 
 | **Ratio** | 20:1, always | Full limiting. It holds the level firmly. |
 | **Attack** | Slowest (about 800 µs) | The front of each hit punches through before it clamps. |
 | **Release** | Fastest (50 ms), stretching to about 120 ms when limiting hard and long | Lively and aggressive. |
-| **Where it starts** | About −3 dBFS | Keeps the converter from going over. |
+| **Where it starts** | Around −3 dBFS | Transients may pass; BRICK WALL catches peaks. |
 
 **How to use it:** light FET LIMIT, then turn **LEVEL** up until it grabs as hard as you like. Click GAIN to More for extra attitude. As it limits harder, it adds a little 2nd harmonic, like the real one.
 
@@ -230,7 +230,7 @@ The meter shows the peak level going into the converter: green is healthy, yello
 | Problem | Fix |
 |---|---|
 | Pink Spider doesn't show up | Restart the DAW and rescan plugins. In Logic: **Settings → Plug-in Manager**, select Pink Spider, **Reset & Rescan Selection**. |
-| The Mac says the installer can't be opened | Use **Open Anyway** in **System Settings → Privacy & Security**. If it still refuses, run `xattr -d com.apple.quarantine ~/Downloads/Pink-Spider-*-macOS.pkg` in Terminal and try again. |
+| The Mac says the installer can't be opened | Use **Open Anyway** in **System Settings → Privacy & Security**. If it still refuses, download a fresh copy from the [official Releases page](https://github.com/BigDumbRobot/Pink-Spider-Beta/releases/latest) and try again. |
 | It's louder or quieter | Set GAIN to **Unity** and LEVEL to **0 dB**. With FATTER, both limiters and the harmonic knobs off, it doesn't change your sound. |
 | It sounds distorted | Watch CLIP and OVER. Click GAIN down, lower LEVEL, or turn the harmonic knobs down. |
 | BRICK WALL is red all the time | Turn LEVEL down until it only flashes red on peaks. |
