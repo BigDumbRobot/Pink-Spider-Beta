@@ -1,4 +1,4 @@
-# Pink Spider (beta) by Anti-Music
+# Pink Spider (beta) by Big Dumb Robot
 
 **The channel you put first on every track:** a console preamp, a tube stage, an 1176-style FET limiter and a converter, then four analog colours (iron, triode, pentode, tape). VST3 and Audio Unit, for Mac and Windows.
 
